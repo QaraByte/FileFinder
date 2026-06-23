@@ -14,6 +14,9 @@ partial class MainForm
     private void InitializeComponent()
     {
         listResults = new ListBox();
+        contextMenu = new ContextMenuStrip();
+        menuOpen = new ToolStripMenuItem();
+        menuOpenFolder = new ToolStripMenuItem();
         lblFound = new Label();
         lblDrive = new Label();
         cmbDrive = new ComboBox();
@@ -29,11 +32,25 @@ partial class MainForm
         btnSave = new Button();
         btnHelp = new Button();
 
+        contextMenu.SuspendLayout();
         grpFileTypes.SuspendLayout();
         SuspendLayout();
 
+        // contextMenu
+        contextMenu.Items.AddRange(new ToolStripItem[] { menuOpen, menuOpenFolder });
+        contextMenu.Name = "contextMenu";
+
+        // menuOpen
+        menuOpen.Text = "Открыть";
+        menuOpen.Click += menuOpen_Click;
+
+        // menuOpenFolder
+        menuOpenFolder.Text = "Открыть папку";
+        menuOpenFolder.Click += menuOpenFolder_Click;
+
         // listResults
         listResults.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        listResults.ContextMenuStrip = contextMenu;
         listResults.Font = new Font("Segoe UI", 9F);
         listResults.FormattingEnabled = true;
         listResults.ItemHeight = 15;
@@ -42,6 +59,7 @@ partial class MainForm
         listResults.Size = new Size(910, 394);
         listResults.TabIndex = 0;
         listResults.HorizontalScrollbar = true;
+        listResults.DoubleClick += listResults_DoubleClick;
 
         // lblFound
         lblFound.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -174,6 +192,7 @@ partial class MainForm
         Name = "MainForm";
         Text = "FileFinder";
 
+        contextMenu.ResumeLayout(false);
         grpFileTypes.ResumeLayout(false);
         grpFileTypes.PerformLayout();
         ResumeLayout(false);
@@ -181,6 +200,9 @@ partial class MainForm
     }
 
     private ListBox listResults;
+    private ContextMenuStrip contextMenu;
+    private ToolStripMenuItem menuOpen;
+    private ToolStripMenuItem menuOpenFolder;
     private Label lblFound;
     private Label lblDrive;
     private ComboBox cmbDrive;

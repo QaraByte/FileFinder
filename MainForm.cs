@@ -134,6 +134,24 @@ public partial class MainForm : Form
             MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
+    private void listResults_DoubleClick(object sender, EventArgs e)
+    {
+        if (listResults.SelectedItem is string path)
+            FileService.OpenFile(path);
+    }
+
+    private void menuOpen_Click(object sender, EventArgs e)
+    {
+        if (listResults.SelectedItem is string path)
+            FileService.OpenFile(path);
+    }
+
+    private void menuOpenFolder_Click(object sender, EventArgs e)
+    {
+        if (listResults.SelectedItem is string path)
+            FileService.OpenFolder(path);
+    }
+
     private void btnHelp_Click(object sender, EventArgs e)
     {
         MessageBox.Show(
