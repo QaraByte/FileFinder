@@ -152,6 +152,14 @@ public partial class MainForm : Form
             FileService.OpenFolder(path);
     }
 
+    private void menuProperties_Click(object sender, EventArgs e)
+    {
+        if (listResults.SelectedItem is not string path) return;
+        var props = FilePropertiesService.GetProperties(path);
+        using var dlg = new FilePropertiesDialog(props);
+        dlg.ShowDialog(this);
+    }
+
     private void btnHelp_Click(object sender, EventArgs e)
     {
         MessageBox.Show(

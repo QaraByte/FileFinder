@@ -17,6 +17,8 @@ partial class MainForm
         contextMenu = new ContextMenuStrip();
         menuOpen = new ToolStripMenuItem();
         menuOpenFolder = new ToolStripMenuItem();
+        menuSeparator = new ToolStripSeparator();
+        menuProperties = new ToolStripMenuItem();
         lblFound = new Label();
         lblDrive = new Label();
         cmbDrive = new ComboBox();
@@ -37,7 +39,7 @@ partial class MainForm
         SuspendLayout();
 
         // contextMenu
-        contextMenu.Items.AddRange(new ToolStripItem[] { menuOpen, menuOpenFolder });
+        contextMenu.Items.AddRange(new ToolStripItem[] { menuOpen, menuOpenFolder, menuSeparator, menuProperties });
         contextMenu.Name = "contextMenu";
 
         // menuOpen
@@ -47,6 +49,10 @@ partial class MainForm
         // menuOpenFolder
         menuOpenFolder.Text = "Открыть папку";
         menuOpenFolder.Click += menuOpenFolder_Click;
+
+        // menuProperties
+        menuProperties.Text = "Свойства";
+        menuProperties.Click += menuProperties_Click;
 
         // listResults
         listResults.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -203,6 +209,8 @@ partial class MainForm
     private ContextMenuStrip contextMenu;
     private ToolStripMenuItem menuOpen;
     private ToolStripMenuItem menuOpenFolder;
+    private ToolStripSeparator menuSeparator;
+    private ToolStripMenuItem menuProperties;
     private Label lblFound;
     private Label lblDrive;
     private ComboBox cmbDrive;
