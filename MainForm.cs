@@ -91,8 +91,13 @@ public partial class MainForm : Form
                         lblFound.Text = $"Найдено: {listResults.Items.Count}";
                     });
                 }
+            }
+            catch (UnauthorizedAccessException) { }
+            catch (IOException) { }
 
-                foreach (string subDir in Directory.EnumerateDirectories(dir))
+            try
+            {
+                foreach (string subDir in Directory.GetDirectories(dir))
                     stack.Push(subDir);
             }
             catch (UnauthorizedAccessException) { }
