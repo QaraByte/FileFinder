@@ -201,14 +201,7 @@ public partial class MainForm : Form
 
     private void btnHelp_Click(object sender, EventArgs e)
     {
-        MessageBox.Show(
-            "FileFinder v1.0\n\n" +
-            "Программа для поиска файлов на компьютере.\n\n" +
-            "1. Выберите диск для поиска\n" +
-            "2. Выберите типы файлов\n" +
-            "3. При необходимости введите часть имени файла в поле «Поиск»\n" +
-            "4. Нажмите кнопку «Поиск»\n" +
-            "5. Результаты можно сохранить в текстовый файл",
-            "О программе", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        using var dlg = new AboutDialog();
+        dlg.ShowDialog(this);
     }
 }
