@@ -17,7 +17,22 @@ public partial class MainForm : Form
         picExcel.Image = IconHelper.GetExtensionIcon(".xlsx");
         picPdf.Image   = IconHelper.GetExtensionIcon(".pdf");
         picMp3.Image   = IconHelper.GetExtensionIcon(".mp3");
+        LicenseService.Initialize();
+        ApplyLicenseState();
         PopulateDrives();
+    }
+
+    private void ApplyLicenseState()
+    {
+        bool licensed = LicenseService.Current?.IsActive == true;
+        chkPdf.Enabled          = licensed;
+        chkMp3.Enabled          = licensed;
+        lblLicenseNotice.Visible = !licensed;
+        if (!licensed)
+        {
+            chkPdf.Checked = false;
+            chkMp3.Checked = false;
+        }
     }
 
     private void PopulateDrives()
@@ -54,12 +69,12 @@ public partial class MainForm : Form
 
         _allResults.Clear();
         listResults.Items.Clear();
-        lblFound.Text = "Найдено: 0";
+        lblFound.Text    = "Найдено: 0";
         statusLabel.Text = "Поиск...";
-        btnSave.Enabled = false;
-        _cts = new CancellationTokenSource();
-        _isSearching = true;
-        btnSearch.Text = "Стоп";
+        btnSave.Enabled  = false;
+        _cts             = new CancellationTokenSource();
+        _isSearching     = true;
+        btnSearch.Text   = "Стоп";
 
         try
         {
@@ -68,10 +83,11 @@ public partial class MainForm : Form
         catch (OperationCanceledException) { }
         finally
         {
-            _isSearching = false;
+            _isSearching   = false;
             btnSearch.Text = "Поиск";
-            btnSave.Enabled = listResults.Items.Count > 0;
-            lblFound.Text = $"Найдено: {listResults.Items.Count}";
+            bool licensed  = LicenseService.Current?.IsActive == true;
+            btnSave.Enabled = licensed && listResults.Items.Count > 0;
+            lblFound.Text    = $"Найдено: {listResults.Items.Count}";
             statusLabel.Text = _cts.IsCancellationRequested
                 ? "Поиск остановлен."
                 : $"Поиск завершён. Найдено: {listResults.Items.Count}";
@@ -139,19 +155,16 @@ public partial class MainForm : Form
         lblFound.Text = $"Найдено: {listResults.Items.Count}";
     }
 
-    private void txtSearch_TextChanged(object sender, EventArgs e)
-    {
-        ApplyFilter();
-    }
+    private void txtSearch_TextChanged(object sender, EventArgs e) => ApplyFilter();
 
     private List<string> GetSelectedExtensions()
     {
         var list = new List<string>();
-        if (chkTxt.Checked) list.Add(".txt");
-        if (chkWord.Checked) { list.Add(".doc"); list.Add(".docx"); }
+        if (chkTxt.Checked)   list.Add(".txt");
+        if (chkWord.Checked)  { list.Add(".doc"); list.Add(".docx"); }
         if (chkExcel.Checked) { list.Add(".xls"); list.Add(".xlsx"); }
-        if (chkPdf.Checked) list.Add(".pdf");
-        if (chkMp3.Checked) list.Add(".mp3");
+        if (chkPdf.Checked)   list.Add(".pdf");
+        if (chkMp3.Checked)   list.Add(".mp3");
         return list;
     }
 
@@ -161,9 +174,9 @@ public partial class MainForm : Form
 
         using var dlg = new SaveFileDialog
         {
-            Filter = "Текстовый файл (*.txt)|*.txt",
-            FileName = "results.txt",
-            DefaultExt = "txt"
+            Filter      = "Текстовый файл (*.txt)|*.txt",
+            FileName    = "results.txt",
+            DefaultExt  = "txt"
         };
 
         if (dlg.ShowDialog() != DialogResult.OK) return;
@@ -203,5 +216,6 @@ public partial class MainForm : Form
     {
         using var dlg = new AboutDialog();
         dlg.ShowDialog(this);
+        ApplyLicenseState(); // обновляем после возможной активации
     }
 }
