@@ -11,6 +11,11 @@ public partial class MainForm : Form
         menuOpen.Image = IconHelper.GetFileIcon();
         menuOpenFolder.Image = IconHelper.GetFolderIcon();
         menuProperties.Image = IconHelper.GetPropertiesIcon();
+        picTxt.Image   = IconHelper.GetExtensionIcon(".txt");
+        picWord.Image  = IconHelper.GetExtensionIcon(".docx");
+        picExcel.Image = IconHelper.GetExtensionIcon(".xlsx");
+        picPdf.Image   = IconHelper.GetExtensionIcon(".pdf");
+        picMp3.Image   = IconHelper.GetExtensionIcon(".mp3");
         PopulateDrives();
     }
 

@@ -36,9 +36,19 @@ partial class MainForm
         btnHelp = new Button();
         statusBar = new StatusStrip();
         statusLabel = new ToolStripStatusLabel();
+        picTxt = new PictureBox();
+        picWord = new PictureBox();
+        picExcel = new PictureBox();
+        picPdf = new PictureBox();
+        picMp3 = new PictureBox();
         contextMenu.SuspendLayout();
         statusBar.SuspendLayout();
         grpFileTypes.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)picTxt).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)picWord).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)picExcel).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)picPdf).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)picMp3).BeginInit();
         SuspendLayout();
         // 
         // listResults
@@ -136,6 +146,11 @@ partial class MainForm
         // grpFileTypes
         // 
         grpFileTypes.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+        grpFileTypes.Controls.Add(picTxt);
+        grpFileTypes.Controls.Add(picWord);
+        grpFileTypes.Controls.Add(picExcel);
+        grpFileTypes.Controls.Add(picPdf);
+        grpFileTypes.Controls.Add(picMp3);
         grpFileTypes.Controls.Add(chkTxt);
         grpFileTypes.Controls.Add(chkWord);
         grpFileTypes.Controls.Add(chkExcel);
@@ -143,51 +158,91 @@ partial class MainForm
         grpFileTypes.Controls.Add(chkMp3);
         grpFileTypes.Location = new Point(12, 484);
         grpFileTypes.Name = "grpFileTypes";
-        grpFileTypes.Size = new Size(318, 178);
+        grpFileTypes.Size = new Size(318, 206);
         grpFileTypes.TabIndex = 3;
         grpFileTypes.TabStop = false;
         grpFileTypes.Text = "Типы файлов";
-        // 
+        //
+        // picTxt
+        //
+        picTxt.Location = new Point(8, 16);
+        picTxt.Name = "picTxt";
+        picTxt.Size = new Size(32, 32);
+        picTxt.SizeMode = PictureBoxSizeMode.Zoom;
+        picTxt.TabStop = false;
+        //
+        // picWord
+        //
+        picWord.Location = new Point(8, 52);
+        picWord.Name = "picWord";
+        picWord.Size = new Size(32, 32);
+        picWord.SizeMode = PictureBoxSizeMode.Zoom;
+        picWord.TabStop = false;
+        //
+        // picExcel
+        //
+        picExcel.Location = new Point(8, 88);
+        picExcel.Name = "picExcel";
+        picExcel.Size = new Size(32, 32);
+        picExcel.SizeMode = PictureBoxSizeMode.Zoom;
+        picExcel.TabStop = false;
+        //
+        // picPdf
+        //
+        picPdf.Location = new Point(8, 124);
+        picPdf.Name = "picPdf";
+        picPdf.Size = new Size(32, 32);
+        picPdf.SizeMode = PictureBoxSizeMode.Zoom;
+        picPdf.TabStop = false;
+        //
+        // picMp3
+        //
+        picMp3.Location = new Point(8, 160);
+        picMp3.Name = "picMp3";
+        picMp3.Size = new Size(32, 32);
+        picMp3.SizeMode = PictureBoxSizeMode.Zoom;
+        picMp3.TabStop = false;
+        //
         // chkTxt
-        // 
+        //
         chkTxt.AutoSize = true;
-        chkTxt.Location = new Point(10, 26);
+        chkTxt.Location = new Point(44, 23);
         chkTxt.Name = "chkTxt";
         chkTxt.Size = new Size(157, 19);
         chkTxt.TabIndex = 0;
         chkTxt.Text = "Текстовые файлы (*.txt)";
-        // 
+        //
         // chkWord
-        // 
+        //
         chkWord.AutoSize = true;
-        chkWord.Location = new Point(10, 56);
+        chkWord.Location = new Point(44, 59);
         chkWord.Name = "chkWord";
         chkWord.Size = new Size(253, 19);
         chkWord.TabIndex = 1;
         chkWord.Text = "Документы Microsoft Word (*.doc, *.docx)";
-        // 
+        //
         // chkExcel
-        // 
+        //
         chkExcel.AutoSize = true;
-        chkExcel.Location = new Point(10, 86);
+        chkExcel.Location = new Point(44, 95);
         chkExcel.Name = "chkExcel";
         chkExcel.Size = new Size(236, 19);
         chkExcel.TabIndex = 2;
         chkExcel.Text = "Документы Microsoft Excel (*.xls, *.xlsx)";
-        // 
+        //
         // chkPdf
-        // 
+        //
         chkPdf.AutoSize = true;
-        chkPdf.Location = new Point(10, 116);
+        chkPdf.Location = new Point(44, 131);
         chkPdf.Name = "chkPdf";
         chkPdf.Size = new Size(150, 19);
         chkPdf.TabIndex = 3;
         chkPdf.Text = "Документы PDF (*.pdf)";
-        // 
+        //
         // chkMp3
-        // 
+        //
         chkMp3.AutoSize = true;
-        chkMp3.Location = new Point(10, 146);
+        chkMp3.Location = new Point(44, 167);
         chkMp3.Name = "chkMp3";
         chkMp3.Size = new Size(139, 19);
         chkMp3.TabIndex = 4;
@@ -242,7 +297,7 @@ partial class MainForm
         //
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(934, 700);
+        ClientSize = new Size(934, 722);
         Controls.Add(listResults);
         Controls.Add(lblFound);
         Controls.Add(lblDrive);
@@ -262,6 +317,11 @@ partial class MainForm
         statusBar.PerformLayout();
         grpFileTypes.ResumeLayout(false);
         grpFileTypes.PerformLayout();
+        ((System.ComponentModel.ISupportInitialize)picTxt).EndInit();
+        ((System.ComponentModel.ISupportInitialize)picWord).EndInit();
+        ((System.ComponentModel.ISupportInitialize)picExcel).EndInit();
+        ((System.ComponentModel.ISupportInitialize)picPdf).EndInit();
+        ((System.ComponentModel.ISupportInitialize)picMp3).EndInit();
         ResumeLayout(false);
         PerformLayout();
     }
@@ -288,4 +348,9 @@ partial class MainForm
     private Button btnHelp;
     private StatusStrip statusBar;
     private ToolStripStatusLabel statusLabel;
+    private PictureBox picTxt;
+    private PictureBox picWord;
+    private PictureBox picExcel;
+    private PictureBox picPdf;
+    private PictureBox picMp3;
 }

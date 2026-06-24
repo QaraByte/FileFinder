@@ -28,25 +28,30 @@ static class IconHelper
     private const uint FILE_ATTRIBUTE_DIRECTORY = 0x10;
 
     public static Image GetFileIcon()
-        => ShellIcon("file.txt", FILE_ATTRIBUTE_NORMAL);
+        => ShellIcon("file.txt", FILE_ATTRIBUTE_NORMAL, small: true);
 
     public static Image GetFolderIcon()
-        => ShellIcon("folder", FILE_ATTRIBUTE_DIRECTORY);
+        => ShellIcon("folder", FILE_ATTRIBUTE_DIRECTORY, small: true);
 
     public static Image GetPropertiesIcon()
         => new Bitmap(SystemIcons.Information.ToBitmap(), 16, 16);
 
-    private static Image ShellIcon(string fakePath, uint fileAttributes)
+    public static Image GetExtensionIcon(string extension)
+        => ShellIcon("file" + extension, FILE_ATTRIBUTE_NORMAL, small: false);
+
+    private static Image ShellIcon(string fakePath, uint fileAttributes, bool small)
     {
+        uint flags = SHGFI_ICON | SHGFI_USEFILEATTRIBUTES | (small ? SHGFI_SMALLICON : 0u);
+        int size = small ? 16 : 32;
+
         var info = new SHFILEINFO();
-        SHGetFileInfo(fakePath, fileAttributes, ref info,
-            (uint)Marshal.SizeOf(info), SHGFI_ICON | SHGFI_SMALLICON | SHGFI_USEFILEATTRIBUTES);
+        SHGetFileInfo(fakePath, fileAttributes, ref info, (uint)Marshal.SizeOf(info), flags);
 
         if (info.hIcon == IntPtr.Zero)
-            return new Bitmap(16, 16);
+            return new Bitmap(size, size);
 
         using var icon = Icon.FromHandle(info.hIcon);
-        var bmp = new Bitmap(icon.ToBitmap(), 16, 16);
+        var bmp = new Bitmap(icon.ToBitmap(), size, size);
         DestroyIcon(info.hIcon);
         return bmp;
     }
