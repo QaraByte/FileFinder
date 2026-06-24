@@ -2,9 +2,40 @@ namespace FileFinder;
 
 public partial class ActivateLicenseDialog : Form
 {
+    private const string ContactEmail = "boroduliha@gmail.com";
+
     public ActivateLicenseDialog()
     {
         InitializeComponent();
+    }
+
+    private void txtEmail_TextChanged(object sender, EventArgs e)
+    {
+        string email = txtEmail.Text.Trim();
+        btnGmail.Enabled = email.Contains('@') && email.Length > 3;
+    }
+
+    private void btnGmail_Click(object sender, EventArgs e)
+    {
+        string userEmail = txtEmail.Text.Trim();
+        string subject   = Uri.EscapeDataString("Лицензия FileFinder");
+        string body      = Uri.EscapeDataString(
+            $"Здравствуйте!\n\nХочу купить лицензию FileFinder ($5/год).\n" +
+            $"Мой e-mail для привязки ключа: {userEmail}");
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName        = $"https://mail.google.com/mail/?view=cm&fs=1&to={ContactEmail}&su={subject}&body={body}",
+            UseShellExecute = true
+        });
+    }
+
+    private void btnCopyEmail_Click(object sender, EventArgs e)
+    {
+        Clipboard.SetText(ContactEmail);
+        btnCopyEmail.Text = "Скопировано!";
+        var timer = new System.Windows.Forms.Timer { Interval = 1500 };
+        timer.Tick += (_, _) => { btnCopyEmail.Text = "Копировать"; timer.Stop(); timer.Dispose(); };
+        timer.Start();
     }
 
     private void btnActivate_Click(object sender, EventArgs e)
@@ -39,6 +70,6 @@ public partial class ActivateLicenseDialog : Form
     private void ShowStatus(string message, Color color)
     {
         lblStatus.ForeColor = color;
-        lblStatus.Text = message;
+        lblStatus.Text      = message;
     }
 }
