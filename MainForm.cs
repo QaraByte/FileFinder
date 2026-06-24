@@ -8,6 +8,8 @@ public partial class MainForm : Form
     public MainForm()
     {
         InitializeComponent();
+        menuOpen.Image = IconHelper.GetFileIcon();
+        menuProperties.Image = IconHelper.GetPropertiesIcon();
         PopulateDrives();
     }
 
