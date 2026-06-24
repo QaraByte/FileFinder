@@ -4,6 +4,7 @@ public partial class MainForm : Form
 {
     private CancellationTokenSource? _cts;
     private bool _isSearching;
+    private readonly List<string> _allResults = new();
 
     public MainForm()
     {
@@ -50,8 +51,8 @@ public partial class MainForm : Form
         if (cmbDrive.SelectedItem == null) return;
 
         string root = cmbDrive.SelectedItem.ToString()! + "\\";
-        string nameFilter = txtSearch.Text.Trim().ToLowerInvariant();
 
+        _allResults.Clear();
         listResults.Items.Clear();
         lblFound.Text = "Найдено: 0";
         statusLabel.Text = "Поиск...";
@@ -62,7 +63,7 @@ public partial class MainForm : Form
 
         try
         {
-            await Task.Run(() => SearchFiles(root, extensions, nameFilter, _cts.Token));
+            await Task.Run(() => SearchFiles(root, extensions, _cts.Token));
         }
         catch (OperationCanceledException) { }
         finally
@@ -77,7 +78,7 @@ public partial class MainForm : Form
         }
     }
 
-    private void SearchFiles(string root, List<string> extensions, string nameFilter, CancellationToken ct)
+    private void SearchFiles(string root, List<string> extensions, CancellationToken ct)
     {
         var stack = new Stack<string>();
         stack.Push(root);
@@ -95,13 +96,14 @@ public partial class MainForm : Form
                     string ext = Path.GetExtension(file).ToLowerInvariant();
                     if (!extensions.Contains(ext)) continue;
 
-                    string name = Path.GetFileName(file).ToLowerInvariant();
-                    if (nameFilter.Length > 0 && !name.Contains(nameFilter)) continue;
-
                     Invoke(() =>
                     {
-                        listResults.Items.Add(file);
-                        lblFound.Text = $"Найдено: {listResults.Items.Count}";
+                        _allResults.Add(file);
+                        if (MatchesFilter(file))
+                        {
+                            listResults.Items.Add(file);
+                            lblFound.Text = $"Найдено: {listResults.Items.Count}";
+                        }
                     });
                 }
             }
@@ -116,6 +118,30 @@ public partial class MainForm : Form
             catch (UnauthorizedAccessException) { }
             catch (IOException) { }
         }
+    }
+
+    private bool MatchesFilter(string path)
+    {
+        string filter = txtSearch.Text.Trim();
+        return filter.Length == 0 || path.Contains(filter, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private void ApplyFilter()
+    {
+        listResults.BeginUpdate();
+        listResults.Items.Clear();
+        foreach (string path in _allResults)
+        {
+            if (MatchesFilter(path))
+                listResults.Items.Add(path);
+        }
+        listResults.EndUpdate();
+        lblFound.Text = $"Найдено: {listResults.Items.Count}";
+    }
+
+    private void txtSearch_TextChanged(object sender, EventArgs e)
+    {
+        ApplyFilter();
     }
 
     private List<string> GetSelectedExtensions()

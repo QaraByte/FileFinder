@@ -142,6 +142,7 @@ partial class MainForm
         txtSearch.Name = "txtSearch";
         txtSearch.Size = new Size(258, 23);
         txtSearch.TabIndex = 2;
+        txtSearch.TextChanged += txtSearch_TextChanged;
         // 
         // grpFileTypes
         // 
