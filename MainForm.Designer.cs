@@ -41,6 +41,7 @@ partial class MainForm
         picExcel = new PictureBox();
         picPdf = new PictureBox();
         picMp3 = new PictureBox();
+        lblLicenseNotice = new Label();
         contextMenu.SuspendLayout();
         statusBar.SuspendLayout();
         grpFileTypes.SuspendLayout();
@@ -157,9 +158,10 @@ partial class MainForm
         grpFileTypes.Controls.Add(chkExcel);
         grpFileTypes.Controls.Add(chkPdf);
         grpFileTypes.Controls.Add(chkMp3);
+        grpFileTypes.Controls.Add(lblLicenseNotice);
         grpFileTypes.Location = new Point(12, 484);
         grpFileTypes.Name = "grpFileTypes";
-        grpFileTypes.Size = new Size(318, 206);
+        grpFileTypes.Size = new Size(318, 222);
         grpFileTypes.TabIndex = 3;
         grpFileTypes.TabStop = false;
         grpFileTypes.Text = "Типы файлов";
@@ -248,7 +250,17 @@ partial class MainForm
         chkMp3.Size = new Size(139, 19);
         chkMp3.TabIndex = 4;
         chkMp3.Text = "Музыка mp3 (*.mp3)";
-        // 
+        //
+        // lblLicenseNotice
+        //
+        lblLicenseNotice.AutoSize  = false;
+        lblLicenseNotice.ForeColor = SystemColors.GrayText;
+        lblLicenseNotice.Location  = new Point(8, 196);
+        lblLicenseNotice.Name      = "lblLicenseNotice";
+        lblLicenseNotice.Size      = new Size(300, 18);
+        lblLicenseNotice.Text      = "Для PDF и MP3 требуется лицензия";
+        lblLicenseNotice.Visible   = false;
+        //
         // btnSearch
         // 
         btnSearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -298,7 +310,7 @@ partial class MainForm
         //
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(934, 722);
+        ClientSize = new Size(934, 738);
         Controls.Add(listResults);
         Controls.Add(lblFound);
         Controls.Add(lblDrive);
@@ -354,4 +366,5 @@ partial class MainForm
     private PictureBox picExcel;
     private PictureBox picPdf;
     private PictureBox picMp3;
+    private Label lblLicenseNotice;
 }
