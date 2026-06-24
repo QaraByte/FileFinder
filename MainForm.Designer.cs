@@ -69,7 +69,6 @@ partial class MainForm
         // 
         // menuOpenFolder
         // 
-        menuOpenFolder.Image = Properties.Resources.wpcmon;
         menuOpenFolder.Name = "menuOpenFolder";
         menuOpenFolder.Size = new Size(180, 22);
         menuOpenFolder.Text = "Открыть папку";
