@@ -34,7 +34,10 @@ partial class MainForm
         btnSearch = new Button();
         btnSave = new Button();
         btnHelp = new Button();
+        statusBar = new StatusStrip();
+        statusLabel = new ToolStripStatusLabel();
         contextMenu.SuspendLayout();
+        statusBar.SuspendLayout();
         grpFileTypes.SuspendLayout();
         SuspendLayout();
         // 
@@ -222,12 +225,25 @@ partial class MainForm
         btnHelp.TabIndex = 6;
         btnHelp.Text = "?";
         btnHelp.Click += btnHelp_Click;
-        // 
+        //
+        // statusBar
+        //
+        statusBar.Items.AddRange(new ToolStripItem[] { statusLabel });
+        statusBar.Name = "statusBar";
+        statusBar.Dock = DockStyle.Bottom;
+        statusBar.SizingGrip = false;
+        //
+        // statusLabel
+        //
+        statusLabel.Name = "statusLabel";
+        statusLabel.Spring = true;
+        statusLabel.TextAlign = ContentAlignment.MiddleLeft;
+        //
         // MainForm
-        // 
+        //
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(934, 674);
+        ClientSize = new Size(934, 700);
         Controls.Add(listResults);
         Controls.Add(lblFound);
         Controls.Add(lblDrive);
@@ -238,10 +254,13 @@ partial class MainForm
         Controls.Add(btnSearch);
         Controls.Add(btnSave);
         Controls.Add(btnHelp);
+        Controls.Add(statusBar);
         MinimumSize = new Size(700, 600);
         Name = "MainForm";
         Text = "FileFinder";
         contextMenu.ResumeLayout(false);
+        statusBar.ResumeLayout(false);
+        statusBar.PerformLayout();
         grpFileTypes.ResumeLayout(false);
         grpFileTypes.PerformLayout();
         ResumeLayout(false);
@@ -268,4 +287,6 @@ partial class MainForm
     private Button btnSearch;
     private Button btnSave;
     private Button btnHelp;
+    private StatusStrip statusBar;
+    private ToolStripStatusLabel statusLabel;
 }

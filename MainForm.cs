@@ -48,6 +48,7 @@ public partial class MainForm : Form
 
         listResults.Items.Clear();
         lblFound.Text = "Найдено: 0";
+        statusLabel.Text = "Поиск...";
         btnSave.Enabled = false;
         _cts = new CancellationTokenSource();
         _isSearching = true;
@@ -64,6 +65,9 @@ public partial class MainForm : Form
             btnSearch.Text = "Поиск";
             btnSave.Enabled = listResults.Items.Count > 0;
             lblFound.Text = $"Найдено: {listResults.Items.Count}";
+            statusLabel.Text = _cts.IsCancellationRequested
+                ? "Поиск остановлен."
+                : $"Поиск завершён. Найдено: {listResults.Items.Count}";
         }
     }
 
@@ -75,6 +79,7 @@ public partial class MainForm : Form
         while (stack.Count > 0 && !ct.IsCancellationRequested)
         {
             string dir = stack.Pop();
+            BeginInvoke(() => statusLabel.Text = dir);
             try
             {
                 foreach (string file in Directory.EnumerateFiles(dir))
