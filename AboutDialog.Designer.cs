@@ -71,7 +71,7 @@ partial class AboutDialog
         lblAuthor.Height    = 22;
         lblAuthor.Name      = "lblAuthor";
         lblAuthor.Padding   = new Padding(6, 0, 0, 0);
-        lblAuthor.Text      = "Автор: Н. Бексатов";
+        lblAuthor.Text      = "Автор: N.Bexatov";
         lblAuthor.TextAlign = ContentAlignment.MiddleLeft;
 
         // lblEmail
