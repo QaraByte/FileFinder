@@ -23,6 +23,7 @@ partial class MainForm
         lblFound = new Label();
         lblDrive = new Label();
         cmbDrive = new ComboBox();
+        btnRefreshDrives = new Button();
         lblSearch = new Label();
         txtSearch = new TextBox();
         grpFileTypes = new GroupBox();
@@ -118,13 +119,24 @@ partial class MainForm
         lblDrive.Text = "Искать на:";
         // 
         // cmbDrive
-        // 
+        //
         cmbDrive.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
         cmbDrive.DropDownStyle = ComboBoxStyle.DropDownList;
         cmbDrive.Location = new Point(804, 418);
         cmbDrive.Name = "cmbDrive";
-        cmbDrive.Size = new Size(118, 23);
+        cmbDrive.Size = new Size(95, 23);
         cmbDrive.TabIndex = 1;
+        //
+        // btnRefreshDrives
+        //
+        btnRefreshDrives.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+        btnRefreshDrives.Location = new Point(903, 418);
+        btnRefreshDrives.Name = "btnRefreshDrives";
+        btnRefreshDrives.Size = new Size(26, 23);
+        btnRefreshDrives.TabIndex = 8;
+        btnRefreshDrives.Text = "↻";
+        btnRefreshDrives.UseVisualStyleBackColor = true;
+        btnRefreshDrives.Click += btnRefreshDrives_Click;
         // 
         // lblSearch
         // 
@@ -315,6 +327,7 @@ partial class MainForm
         Controls.Add(lblFound);
         Controls.Add(lblDrive);
         Controls.Add(cmbDrive);
+        Controls.Add(btnRefreshDrives);
         Controls.Add(lblSearch);
         Controls.Add(txtSearch);
         Controls.Add(grpFileTypes);
@@ -348,6 +361,7 @@ partial class MainForm
     private Label lblFound;
     private Label lblDrive;
     private ComboBox cmbDrive;
+    private Button btnRefreshDrives;
     private Label lblSearch;
     private TextBox txtSearch;
     private GroupBox grpFileTypes;
