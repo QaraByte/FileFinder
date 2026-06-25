@@ -37,14 +37,22 @@ public partial class MainForm : Form
 
     private void PopulateDrives()
     {
+        var selected = cmbDrive.SelectedItem?.ToString();
         cmbDrive.Items.Clear();
         foreach (var drive in DriveInfo.GetDrives())
         {
             if (drive.IsReady)
                 cmbDrive.Items.Add(drive.Name.TrimEnd('\\'));
         }
-        if (cmbDrive.Items.Count > 0)
+        if (selected != null && cmbDrive.Items.Contains(selected))
+            cmbDrive.SelectedItem = selected;
+        else if (cmbDrive.Items.Count > 0)
             cmbDrive.SelectedIndex = 0;
+    }
+
+    private void btnRefreshDrives_Click(object sender, EventArgs e)
+    {
+        PopulateDrives();
     }
 
     private async void btnSearch_Click(object sender, EventArgs e)
