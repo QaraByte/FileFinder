@@ -336,6 +336,7 @@ partial class MainForm
         Controls.Add(btnHelp);
         Controls.Add(statusBar);
         MinimumSize = new Size(700, 600);
+        MaximizeBox = false;
         Name = "MainForm";
         Text = "FileFinder";
         contextMenu.ResumeLayout(false);
