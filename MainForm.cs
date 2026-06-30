@@ -17,6 +17,8 @@ public partial class MainForm : Form
         picExcel.Image = IconHelper.GetExtensionIcon(".xlsx");
         picPdf.Image   = IconHelper.GetExtensionIcon(".pdf");
         picMp3.Image   = IconHelper.GetExtensionIcon(".mp3");
+        picPpt.Image   = IconHelper.GetExtensionIcon(".pptx");
+        picImg.Image   = IconHelper.GetExtensionIcon(".jpg");
         LicenseService.Initialize();
         ApplyLicenseState();
         PopulateDrives();
@@ -27,11 +29,15 @@ public partial class MainForm : Form
         bool licensed = LicenseService.Current?.IsActive == true;
         chkPdf.Enabled          = licensed;
         chkMp3.Enabled          = licensed;
+        chkPpt.Enabled          = licensed;
+        chkImg.Enabled          = licensed;
         lblLicenseNotice.Visible = !licensed;
         if (!licensed)
         {
             chkPdf.Checked = false;
             chkMp3.Checked = false;
+            chkPpt.Checked = false;
+            chkImg.Checked = false;
         }
     }
 
@@ -173,6 +179,8 @@ public partial class MainForm : Form
         if (chkExcel.Checked) { list.Add(".xls"); list.Add(".xlsx"); }
         if (chkPdf.Checked)   list.Add(".pdf");
         if (chkMp3.Checked)   list.Add(".mp3");
+        if (chkPpt.Checked)   { list.Add(".ppt"); list.Add(".pptx"); }
+        if (chkImg.Checked)   { list.Add(".jpg"); list.Add(".jpeg"); list.Add(".png"); list.Add(".gif"); list.Add(".bmp"); }
         return list;
     }
 

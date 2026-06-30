@@ -32,6 +32,8 @@ partial class MainForm
         chkExcel = new CheckBox();
         chkPdf = new CheckBox();
         chkMp3 = new CheckBox();
+        chkPpt = new CheckBox();
+        chkImg = new CheckBox();
         btnSearch = new Button();
         btnSave = new Button();
         btnHelp = new Button();
@@ -42,6 +44,8 @@ partial class MainForm
         picExcel = new PictureBox();
         picPdf = new PictureBox();
         picMp3 = new PictureBox();
+        picPpt = new PictureBox();
+        picImg = new PictureBox();
         lblLicenseNotice = new Label();
         contextMenu.SuspendLayout();
         statusBar.SuspendLayout();
@@ -51,6 +55,8 @@ partial class MainForm
         ((System.ComponentModel.ISupportInitialize)picExcel).BeginInit();
         ((System.ComponentModel.ISupportInitialize)picPdf).BeginInit();
         ((System.ComponentModel.ISupportInitialize)picMp3).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)picPpt).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)picImg).BeginInit();
         SuspendLayout();
         // 
         // listResults
@@ -102,7 +108,7 @@ partial class MainForm
         // 
         lblFound.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
         lblFound.AutoSize = true;
-        lblFound.Location = new Point(12, 422);
+        lblFound.Location = new Point(12, 494);
         lblFound.Name = "lblFound";
         lblFound.Size = new Size(58, 15);
         lblFound.TabIndex = 1;
@@ -112,7 +118,7 @@ partial class MainForm
         // 
         lblDrive.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
         lblDrive.AutoSize = true;
-        lblDrive.Location = new Point(726, 422);
+        lblDrive.Location = new Point(726, 494);
         lblDrive.Name = "lblDrive";
         lblDrive.Size = new Size(64, 15);
         lblDrive.TabIndex = 2;
@@ -122,7 +128,7 @@ partial class MainForm
         //
         cmbDrive.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
         cmbDrive.DropDownStyle = ComboBoxStyle.DropDownList;
-        cmbDrive.Location = new Point(804, 418);
+        cmbDrive.Location = new Point(804, 490);
         cmbDrive.Name = "cmbDrive";
         cmbDrive.Size = new Size(95, 23);
         cmbDrive.TabIndex = 1;
@@ -130,7 +136,7 @@ partial class MainForm
         // btnRefreshDrives
         //
         btnRefreshDrives.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-        btnRefreshDrives.Location = new Point(903, 418);
+        btnRefreshDrives.Location = new Point(903, 490);
         btnRefreshDrives.Name = "btnRefreshDrives";
         btnRefreshDrives.Size = new Size(26, 23);
         btnRefreshDrives.TabIndex = 8;
@@ -142,7 +148,7 @@ partial class MainForm
         // 
         lblSearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
         lblSearch.AutoSize = true;
-        lblSearch.Location = new Point(12, 456);
+        lblSearch.Location = new Point(12, 528);
         lblSearch.Name = "lblSearch";
         lblSearch.Size = new Size(45, 15);
         lblSearch.TabIndex = 3;
@@ -151,7 +157,7 @@ partial class MainForm
         // txtSearch
         // 
         txtSearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-        txtSearch.Location = new Point(64, 452);
+        txtSearch.Location = new Point(64, 524);
         txtSearch.Name = "txtSearch";
         txtSearch.Size = new Size(258, 23);
         txtSearch.TabIndex = 2;
@@ -165,15 +171,19 @@ partial class MainForm
         grpFileTypes.Controls.Add(picExcel);
         grpFileTypes.Controls.Add(picPdf);
         grpFileTypes.Controls.Add(picMp3);
+        grpFileTypes.Controls.Add(picPpt);
+        grpFileTypes.Controls.Add(picImg);
         grpFileTypes.Controls.Add(chkTxt);
         grpFileTypes.Controls.Add(chkWord);
         grpFileTypes.Controls.Add(chkExcel);
         grpFileTypes.Controls.Add(chkPdf);
         grpFileTypes.Controls.Add(chkMp3);
+        grpFileTypes.Controls.Add(chkPpt);
+        grpFileTypes.Controls.Add(chkImg);
         grpFileTypes.Controls.Add(lblLicenseNotice);
         grpFileTypes.Location = new Point(12, 484);
         grpFileTypes.Name = "grpFileTypes";
-        grpFileTypes.Size = new Size(318, 222);
+        grpFileTypes.Size = new Size(318, 294);
         grpFileTypes.TabIndex = 3;
         grpFileTypes.TabStop = false;
         grpFileTypes.Text = "Типы файлов";
@@ -217,6 +227,22 @@ partial class MainForm
         picMp3.Size = new Size(32, 32);
         picMp3.SizeMode = PictureBoxSizeMode.Zoom;
         picMp3.TabStop = false;
+        //
+        // picPpt
+        //
+        picPpt.Location = new Point(8, 196);
+        picPpt.Name = "picPpt";
+        picPpt.Size = new Size(32, 32);
+        picPpt.SizeMode = PictureBoxSizeMode.Zoom;
+        picPpt.TabStop = false;
+        //
+        // picImg
+        //
+        picImg.Location = new Point(8, 232);
+        picImg.Name = "picImg";
+        picImg.Size = new Size(32, 32);
+        picImg.SizeMode = PictureBoxSizeMode.Zoom;
+        picImg.TabStop = false;
         //
         // chkTxt
         //
@@ -263,21 +289,39 @@ partial class MainForm
         chkMp3.TabIndex = 4;
         chkMp3.Text = "Музыка mp3 (*.mp3)";
         //
+        // chkPpt
+        //
+        chkPpt.AutoSize = true;
+        chkPpt.Location = new Point(44, 203);
+        chkPpt.Name = "chkPpt";
+        chkPpt.Size = new Size(253, 19);
+        chkPpt.TabIndex = 5;
+        chkPpt.Text = "Презентации PowerPoint (*.ppt, *.pptx)";
+        //
+        // chkImg
+        //
+        chkImg.AutoSize = true;
+        chkImg.Location = new Point(44, 239);
+        chkImg.Name = "chkImg";
+        chkImg.Size = new Size(253, 19);
+        chkImg.TabIndex = 6;
+        chkImg.Text = "Изображения (*.jpg, *.png, *.gif, *.bmp)";
+        //
         // lblLicenseNotice
         //
         lblLicenseNotice.AutoSize  = false;
         lblLicenseNotice.ForeColor = SystemColors.GrayText;
-        lblLicenseNotice.Location  = new Point(8, 196);
+        lblLicenseNotice.Location  = new Point(8, 268);
         lblLicenseNotice.Name      = "lblLicenseNotice";
         lblLicenseNotice.Size      = new Size(300, 18);
-        lblLicenseNotice.Text      = "Для PDF и MP3 требуется лицензия";
+        lblLicenseNotice.Text      = "PDF, MP3, презентации и картинки — только Pro";
         lblLicenseNotice.Visible   = false;
         //
         // btnSearch
         // 
         btnSearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
         btnSearch.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-        btnSearch.Location = new Point(348, 510);
+        btnSearch.Location = new Point(348, 582);
         btnSearch.Name = "btnSearch";
         btnSearch.Size = new Size(140, 52);
         btnSearch.TabIndex = 4;
@@ -288,7 +332,7 @@ partial class MainForm
         // 
         btnSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
         btnSave.Enabled = false;
-        btnSave.Location = new Point(348, 572);
+        btnSave.Location = new Point(348, 644);
         btnSave.Name = "btnSave";
         btnSave.Size = new Size(140, 28);
         btnSave.TabIndex = 5;
@@ -298,7 +342,7 @@ partial class MainForm
         // btnHelp
         // 
         btnHelp.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-        btnHelp.Location = new Point(878, 634);
+        btnHelp.Location = new Point(878, 706);
         btnHelp.Name = "btnHelp";
         btnHelp.Size = new Size(44, 28);
         btnHelp.TabIndex = 6;
@@ -322,7 +366,7 @@ partial class MainForm
         //
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(934, 738);
+        ClientSize = new Size(934, 810);
         Controls.Add(listResults);
         Controls.Add(lblFound);
         Controls.Add(lblDrive);
@@ -335,7 +379,7 @@ partial class MainForm
         Controls.Add(btnSave);
         Controls.Add(btnHelp);
         Controls.Add(statusBar);
-        MinimumSize = new Size(700, 600);
+        MinimumSize = new Size(700, 672);
         MaximizeBox = false;
         Name = "MainForm";
         Text = "FileFinder";
@@ -349,6 +393,8 @@ partial class MainForm
         ((System.ComponentModel.ISupportInitialize)picExcel).EndInit();
         ((System.ComponentModel.ISupportInitialize)picPdf).EndInit();
         ((System.ComponentModel.ISupportInitialize)picMp3).EndInit();
+        ((System.ComponentModel.ISupportInitialize)picPpt).EndInit();
+        ((System.ComponentModel.ISupportInitialize)picImg).EndInit();
         ResumeLayout(false);
         PerformLayout();
     }
@@ -381,5 +427,9 @@ partial class MainForm
     private PictureBox picExcel;
     private PictureBox picPdf;
     private PictureBox picMp3;
+    private PictureBox picPpt;
+    private PictureBox picImg;
+    private CheckBox chkPpt;
+    private CheckBox chkImg;
     private Label lblLicenseNotice;
 }
