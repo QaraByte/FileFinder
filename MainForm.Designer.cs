@@ -113,9 +113,9 @@ partial class MainForm
         lblFound.Size = new Size(58, 15);
         lblFound.TabIndex = 1;
         lblFound.Text = "Найдено:";
-        //
+        // 
         // lblDrive
-        //
+        // 
         lblDrive.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
         lblDrive.AutoSize = true;
         lblDrive.Location = new Point(726, 422);
@@ -123,18 +123,18 @@ partial class MainForm
         lblDrive.Size = new Size(64, 15);
         lblDrive.TabIndex = 2;
         lblDrive.Text = "Искать на:";
-        //
+        // 
         // cmbDrive
-        //
+        // 
         cmbDrive.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
         cmbDrive.DropDownStyle = ComboBoxStyle.DropDownList;
         cmbDrive.Location = new Point(804, 418);
         cmbDrive.Name = "cmbDrive";
         cmbDrive.Size = new Size(95, 23);
         cmbDrive.TabIndex = 1;
-        //
+        // 
         // btnRefreshDrives
-        //
+        // 
         btnRefreshDrives.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
         btnRefreshDrives.Location = new Point(903, 418);
         btnRefreshDrives.Name = "btnRefreshDrives";
@@ -143,9 +143,9 @@ partial class MainForm
         btnRefreshDrives.Text = "↻";
         btnRefreshDrives.UseVisualStyleBackColor = true;
         btnRefreshDrives.Click += btnRefreshDrives_Click;
-        //
+        // 
         // lblSearch
-        //
+        // 
         lblSearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
         lblSearch.AutoSize = true;
         lblSearch.Location = new Point(12, 456);
@@ -153,11 +153,12 @@ partial class MainForm
         lblSearch.Size = new Size(45, 15);
         lblSearch.TabIndex = 3;
         lblSearch.Text = "Поиск:";
-        //
+        lblSearch.Click += lblSearch_Click;
+        // 
         // txtSearch
-        //
+        // 
         txtSearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-        txtSearch.Location = new Point(64, 452);
+        txtSearch.Location = new Point(72, 453);
         txtSearch.Name = "txtSearch";
         txtSearch.Size = new Size(258, 23);
         txtSearch.TabIndex = 2;
