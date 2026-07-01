@@ -96,23 +96,7 @@ partial class AboutDialog
         txtHistory.ReadOnly    = true;
         txtHistory.ScrollBars  = RichTextBoxScrollBars.Vertical;
         txtHistory.TabStop     = false;
-        txtHistory.Text =
-            "Версия 1.00 / 15.02.2017\r\n" +
-            "Поиск файлов различных форматов (*.txt, *.doc, *.docx)\r\n" +
-            "в каталогах пятого уровня на диске C.\r\n" +
-            "\r\n" +
-            "Версия 1.01 / 16.02.2017\r\n" +
-            "- добавлены иконки файлов (Word, Excel, pdf)\r\n" +
-            "- добавился поиск документов Microsoft Excel\r\n" +
-            "- редизайн «Типов файлов»\r\n" +
-            "- изменено окно «О программе»\r\n" +
-            "\r\n" +
-            "Версия 2.00 / 2026\r\n" +
-            "- Полная переработка приложения\r\n" +
-            "- Поддержка новых форматов: PDF, MP3, PowerPoint, изображения\r\n" +
-            "- Лицензионная система Pro\r\n" +
-            "- Добавлена справка\r\n" +
-            "- Английский язык (в разработке)";
+        txtHistory.Text = "";
 
         // lblAuthor
         lblAuthor.AutoSize  = false;
