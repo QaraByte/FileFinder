@@ -7,6 +7,7 @@ static class Program
     {
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
+        Lang.Load();
         Application.Run(new MainForm());
     }
 }

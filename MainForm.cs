@@ -9,19 +9,42 @@ public partial class MainForm : Form
     public MainForm()
     {
         InitializeComponent();
-        menuOpen.Image = IconHelper.GetFileIcon();
+        menuOpen.Image       = IconHelper.GetFileIcon();
         menuOpenFolder.Image = IconHelper.GetFolderIcon();
         menuProperties.Image = IconHelper.GetPropertiesIcon();
-        picTxt.Image = IconHelper.GetExtensionIcon(".txt");
-        picWord.Image = IconHelper.GetExtensionIcon(".docx");
+        picTxt.Image   = IconHelper.GetExtensionIcon(".txt");
+        picWord.Image  = IconHelper.GetExtensionIcon(".docx");
         picExcel.Image = IconHelper.GetExtensionIcon(".xlsx");
-        picPdf.Image = IconHelper.GetExtensionIcon(".pdf");
-        picMp3.Image = IconHelper.GetExtensionIcon(".mp3");
-        picPpt.Image = IconHelper.GetExtensionIcon(".pptx");
-        picImg.Image = IconHelper.GetExtensionIcon(".jpg");
+        picPdf.Image   = IconHelper.GetExtensionIcon(".pdf");
+        picMp3.Image   = IconHelper.GetExtensionIcon(".mp3");
+        picPpt.Image   = IconHelper.GetExtensionIcon(".pptx");
+        picImg.Image   = IconHelper.GetExtensionIcon(".jpg");
         LicenseService.Initialize();
         ApplyLicenseState();
+        ApplyLanguage();
         PopulateDrives();
+    }
+
+    private void ApplyLanguage()
+    {
+        lblFound.Text         = Lang.Found;
+        lblDrive.Text         = Lang.DriveLabel;
+        lblSearch.Text        = Lang.FilterLabel;
+        grpFileTypes.Text     = Lang.FileTypesGroup;
+        chkTxt.Text           = Lang.ChkTxt;
+        chkWord.Text          = Lang.ChkWord;
+        chkExcel.Text         = Lang.ChkExcel;
+        chkPdf.Text           = Lang.ChkPdf;
+        chkMp3.Text           = Lang.ChkMp3;
+        chkPpt.Text           = Lang.ChkPpt;
+        chkImg.Text           = Lang.ChkImg;
+        lblLicenseNotice.Text = Lang.ProNotice;
+        btnSearch.Text        = Lang.BtnSearch;
+        btnSave.Text          = Lang.BtnSave;
+        menuOpen.Text         = Lang.MenuOpen;
+        menuOpenFolder.Text   = Lang.MenuOpenFolder;
+        menuProperties.Text   = Lang.MenuProperties;
+        btnLang.Text          = Lang.Current == "ru" ? "EN" : "RU";
     }
 
     private void ApplyLicenseState()
@@ -72,7 +95,7 @@ public partial class MainForm : Form
         var extensions = GetSelectedExtensions();
         if (extensions.Count == 0)
         {
-            MessageBox.Show("Выберите хотя бы один тип файлов.", "FileFinder",
+            MessageBox.Show(Lang.MsgSelectType, "FileFinder",
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
@@ -83,12 +106,12 @@ public partial class MainForm : Form
 
         _allResults.Clear();
         listResults.Items.Clear();
-        lblFound.Text = "Найдено: 0";
-        statusLabel.Text = "Поиск...";
+        lblFound.Text = Lang.FoundN(0);
+        statusLabel.Text = Lang.StatusSearching;
         btnSave.Enabled = false;
         _cts = new CancellationTokenSource();
         _isSearching = true;
-        btnSearch.Text = "Стоп";
+        btnSearch.Text = Lang.BtnStop;
 
         try
         {
@@ -98,13 +121,13 @@ public partial class MainForm : Form
         finally
         {
             _isSearching = false;
-            btnSearch.Text = "Поиск";
+            btnSearch.Text = Lang.BtnSearch;
             bool licensed = LicenseService.Current?.IsActive == true;
             btnSave.Enabled = licensed && listResults.Items.Count > 0;
-            lblFound.Text = $"Найдено: {listResults.Items.Count}";
+            lblFound.Text = Lang.FoundN(listResults.Items.Count);
             statusLabel.Text = _cts.IsCancellationRequested
-                ? "Поиск остановлен."
-                : $"Поиск завершён. Найдено: {listResults.Items.Count}";
+                ? Lang.StatusStopped
+                : Lang.StatusDone(listResults.Items.Count);
         }
     }
 
@@ -132,7 +155,7 @@ public partial class MainForm : Form
                         if (MatchesFilter(file))
                         {
                             listResults.Items.Add(file);
-                            lblFound.Text = $"Найдено: {listResults.Items.Count}";
+                            lblFound.Text = Lang.FoundN(listResults.Items.Count);
                         }
                     });
                 }
@@ -166,7 +189,7 @@ public partial class MainForm : Form
                 listResults.Items.Add(path);
         }
         listResults.EndUpdate();
-        lblFound.Text = $"Найдено: {listResults.Items.Count}";
+        lblFound.Text = Lang.FoundN(listResults.Items.Count);
     }
 
     private void txtSearch_TextChanged(object sender, EventArgs e) => ApplyFilter();
@@ -190,7 +213,7 @@ public partial class MainForm : Form
 
         using var dlg = new SaveFileDialog
         {
-            Filter = "Текстовый файл (*.txt)|*.txt",
+            Filter = "Text file (*.txt)|*.txt",
             FileName = "results.txt",
             DefaultExt = "txt"
         };
@@ -198,8 +221,15 @@ public partial class MainForm : Form
         if (dlg.ShowDialog() != DialogResult.OK) return;
 
         File.WriteAllLines(dlg.FileName, listResults.Items.Cast<string>());
-        MessageBox.Show($"Результаты сохранены:\n{dlg.FileName}", "FileFinder",
+        MessageBox.Show(Lang.SavedMsg(dlg.FileName), "FileFinder",
             MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+
+    private void btnLang_Click(object sender, EventArgs e)
+    {
+        Lang.Switch();
+        btnLang.Text = Lang.Current == "ru" ? "EN" : "RU";
+        statusLabel.Text = Lang.RestartToApply;
     }
 
     private void listResults_DoubleClick(object sender, EventArgs e)
@@ -232,11 +262,8 @@ public partial class MainForm : Form
     {
         using var dlg = new AboutDialog();
         dlg.ShowDialog(this);
-        ApplyLicenseState(); // обновляем после возможной активации
+        ApplyLicenseState();
     }
 
-    private void lblSearch_Click(object sender, EventArgs e)
-    {
-
-    }
+    private void lblSearch_Click(object sender, EventArgs e) { }
 }
