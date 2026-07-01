@@ -44,6 +44,7 @@ partial class MainForm
         lblLicenseNotice = new Label();
         btnSearch = new Button();
         btnSave = new Button();
+        btnLang = new Button();
         btnHelp = new Button();
         statusBar = new StatusStrip();
         statusLabel = new ToolStripStatusLabel();
@@ -346,16 +347,26 @@ partial class MainForm
         btnSave.TabIndex = 5;
         btnSave.Text = "Сохранить результаты";
         btnSave.Click += btnSave_Click;
-        // 
+        //
+        // btnLang
+        //
+        btnLang.Anchor   = AnchorStyles.Bottom | AnchorStyles.Right;
+        btnLang.Location = new Point(835, 750);
+        btnLang.Name     = "btnLang";
+        btnLang.Size     = new Size(44, 28);
+        btnLang.TabIndex = 7;
+        btnLang.Text     = "EN";
+        btnLang.Click   += btnLang_Click;
+        //
         // btnHelp
-        // 
-        btnHelp.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+        //
+        btnHelp.Anchor   = AnchorStyles.Bottom | AnchorStyles.Right;
         btnHelp.Location = new Point(885, 750);
-        btnHelp.Name = "btnHelp";
-        btnHelp.Size = new Size(44, 28);
+        btnHelp.Name     = "btnHelp";
+        btnHelp.Size     = new Size(44, 28);
         btnHelp.TabIndex = 6;
-        btnHelp.Text = "?";
-        btnHelp.Click += btnHelp_Click;
+        btnHelp.Text     = "?";
+        btnHelp.Click   += btnHelp_Click;
         // 
         // statusBar
         // 
@@ -388,6 +399,7 @@ partial class MainForm
         Controls.Add(grpFileTypes);
         Controls.Add(btnSearch);
         Controls.Add(btnSave);
+        Controls.Add(btnLang);
         Controls.Add(btnHelp);
         Controls.Add(statusBar);
         MaximizeBox = false;
@@ -430,6 +442,7 @@ partial class MainForm
     private CheckBox chkMp3;
     private Button btnSearch;
     private Button btnSave;
+    private Button btnLang;
     private Button btnHelp;
     private StatusStrip statusBar;
     private ToolStripStatusLabel statusLabel;

@@ -7,6 +7,19 @@ public partial class ActivateLicenseDialog : Form
     public ActivateLicenseDialog()
     {
         InitializeComponent();
+        ApplyLanguage();
+    }
+
+    private void ApplyLanguage()
+    {
+        Text                     = Lang.ActTitle;
+        txtEmail.PlaceholderText = Lang.ActEmailPlaceholder;
+        btnGmail.Text            = Lang.ActBtnGmail;
+        lblOr.Text               = Lang.ActOr;
+        lblKeyCaption.Text       = Lang.ActKeyCaption;
+        btnActivate.Text         = Lang.ActBtnActivate;
+        btnClose.Text            = Lang.ActBtnClose;
+        btnCopyEmail.Text        = Lang.ActBtnCopy;
     }
 
     private void txtEmail_TextChanged(object sender, EventArgs e)
@@ -18,10 +31,8 @@ public partial class ActivateLicenseDialog : Form
     private void btnGmail_Click(object sender, EventArgs e)
     {
         string userEmail = txtEmail.Text.Trim();
-        string subject   = Uri.EscapeDataString("Лицензия FileFinder");
-        string body      = Uri.EscapeDataString(
-            $"Здравствуйте!\n\nХочу купить лицензию FileFinder ($5/год).\n" +
-            $"Мой e-mail для привязки ключа: {userEmail}");
+        string subject   = Uri.EscapeDataString(Lang.ActGmailSubject);
+        string body      = Uri.EscapeDataString(Lang.ActGmailBody(userEmail));
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
         {
             FileName        = $"https://mail.google.com/mail/?view=cm&fs=1&to={ContactEmail}&su={subject}&body={body}",
@@ -32,9 +43,9 @@ public partial class ActivateLicenseDialog : Form
     private void btnCopyEmail_Click(object sender, EventArgs e)
     {
         Clipboard.SetText(ContactEmail);
-        btnCopyEmail.Text = "Скопировано!";
+        btnCopyEmail.Text = Lang.ActCopied;
         var timer = new System.Windows.Forms.Timer { Interval = 1500 };
-        timer.Tick += (_, _) => { btnCopyEmail.Text = "Копировать"; timer.Stop(); timer.Dispose(); };
+        timer.Tick += (_, _) => { btnCopyEmail.Text = Lang.ActBtnCopy; timer.Stop(); timer.Dispose(); };
         timer.Start();
     }
 
@@ -45,25 +56,25 @@ public partial class ActivateLicenseDialog : Form
 
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(key))
         {
-            ShowStatus("Введите e-mail и ключ лицензии.", Color.OrangeRed);
+            ShowStatus(Lang.ActErrNoData, Color.OrangeRed);
             return;
         }
 
         if (!email.Contains('@'))
         {
-            ShowStatus("Введите корректный e-mail.", Color.OrangeRed);
+            ShowStatus(Lang.ActErrBadEmail, Color.OrangeRed);
             return;
         }
 
         if (LicenseService.Activate(email, key, out LicenseInfo? info))
         {
-            ShowStatus($"Лицензия активирована до {info!.Expiry:dd.MM.yyyy}.", Color.Green);
+            ShowStatus(Lang.ActSuccess(info!.Expiry), Color.Green);
             btnActivate.Enabled = false;
             DialogResult = DialogResult.OK;
         }
         else
         {
-            ShowStatus("Неверный ключ или e-mail. Проверьте данные из письма.", Color.OrangeRed);
+            ShowStatus(Lang.ActErrBadKey, Color.OrangeRed);
         }
     }
 

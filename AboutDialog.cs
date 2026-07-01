@@ -5,9 +5,17 @@ public partial class AboutDialog : Form
     public AboutDialog()
     {
         InitializeComponent();
-        btnCopyEmail.Text = ""; // Segoe MDL2 Assets: copy icon
+        btnCopyEmail.Text = ""; // Segoe MDL2 Assets: copy icon (U+E8C8)
+        ApplyLanguage();
         RefreshLicenseStatus();
         PopulateHelp();
+    }
+
+    private void ApplyLanguage()
+    {
+        tabAbout.Text  = Lang.TabAbout;
+        tabHelp.Text   = Lang.TabHelp;
+        lblAuthor.Text = Lang.AboutAuthor;
     }
 
     private void PopulateHelp()
@@ -20,38 +28,23 @@ public partial class AboutDialog : Form
             txtHelp.AppendText(body + "\r\n\r\n");
         }
 
-        Section("Выбор типов файлов",
-            "Отметьте нужные форматы в блоке «Типы файлов» (*.txt, *.doc, *.pdf и др.).");
+        Section(Lang.HelpFileTypes,  Lang.HelpFileTypesBody);
+        Section(Lang.HelpDrive,      Lang.HelpDriveBody);
+        Section(Lang.HelpSearch,     Lang.HelpSearchBody);
+        Section(Lang.HelpResults,    Lang.HelpResultsBody);
+        Section(Lang.HelpFilter,     Lang.HelpFilterBody);
+        Section(Lang.HelpSave,       Lang.HelpSaveBody);
 
-        Section("Выбор диска",
-            "В поле «Искать на:» выберите диск для поиска. Кнопка ↻ обновляет список подключённых дисков.");
-
-        Section("Поиск",
-            "Нажмите «Поиск» — программа рекурсивно просканирует все папки выбранного диска. " +
-            "Во время поиска кнопка меняется на «Стоп» — нажмите для остановки.");
-
-        Section("Список результатов",
-            "Найденные файлы отображаются в списке результатов (большая область вверху окна):\r\n" +
-            "  • двойной клик — открыть файл\r\n" +
-            "  • правый клик — открывается контекстное меню (Открыть, Открыть папку, Свойства)");
-
-        Section("Фильтр по имени",
-            "Поле «Поиск:» фильтрует список результатов по имени файла в реальном времени, без повторного поиска.");
-
-        Section("Сохранить результаты",
-            "Кнопка «Сохранить результаты» сохраняет список в текстовый файл.");
-
-        // "Лицензия Pro" — выделяем цветом и жирным
         int headerStart = txtHelp.TextLength;
-        txtHelp.AppendText("Лицензия Pro\r\n");
-        txtHelp.Select(headerStart, "Лицензия Pro".Length);
+        txtHelp.AppendText(Lang.HelpProHeader + "\r\n");
+        txtHelp.Select(headerStart, Lang.HelpProHeader.Length);
         txtHelp.SelectionColor = Color.OrangeRed;
         using var boldFont = new Font(txtHelp.Font, FontStyle.Bold);
         txtHelp.SelectionFont = boldFont;
         txtHelp.Select(txtHelp.TextLength, 0);
         txtHelp.SelectionColor = txtHelp.ForeColor;
-        txtHelp.SelectionFont = txtHelp.Font;
-        txtHelp.AppendText("Открывает дополнительные форматы: PDF, MP3, PowerPoint, изображения (JPG, PNG, GIF, BMP).");
+        txtHelp.SelectionFont  = txtHelp.Font;
+        txtHelp.AppendText(Lang.HelpProBody);
     }
 
     private void RefreshLicenseStatus()
@@ -59,21 +52,21 @@ public partial class AboutDialog : Form
         var lic = LicenseService.Current;
         if (lic == null)
         {
-            lblLicenseStatus.Text      = "Лицензия: не активирована";
+            lblLicenseStatus.Text      = Lang.LicNotActivated;
             lblLicenseStatus.ForeColor = SystemColors.GrayText;
-            btnActivate.Text           = "Активировать лицензию...";
+            btnActivate.Text           = Lang.BtnActivateLic;
         }
         else if (lic.IsActive)
         {
-            lblLicenseStatus.Text      = $"Лицензия: активна до {lic.Expiry:dd.MM.yyyy}";
+            lblLicenseStatus.Text      = Lang.LicActive(lic.Expiry);
             lblLicenseStatus.ForeColor = Color.Green;
-            btnActivate.Text           = "Сменить лицензию...";
+            btnActivate.Text           = Lang.BtnChangeLic;
         }
         else
         {
-            lblLicenseStatus.Text      = $"Лицензия: истекла {lic.Expiry:dd.MM.yyyy} — продлите подписку";
+            lblLicenseStatus.Text      = Lang.LicExpired(lic.Expiry);
             lblLicenseStatus.ForeColor = Color.OrangeRed;
-            btnActivate.Text           = "Продлить лицензию...";
+            btnActivate.Text           = Lang.BtnRenewLic;
         }
     }
 
