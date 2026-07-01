@@ -107,6 +107,41 @@ public static class Lang
         "Открывает дополнительные форматы: PDF, MP3, PowerPoint, изображения (JPG, PNG, GIF, BMP).",
         "Unlocks additional formats: PDF, MP3, PowerPoint, images (JPG, PNG, GIF, BMP).");
 
+    // ── AboutDialog – version history ────────────────────────────────────────
+    public static string HistoryText => S(
+        "Версия 1.00 / 15.02.2017\r\n" +
+        "Поиск файлов различных форматов (*.txt, *.doc, *.docx)\r\n" +
+        "в каталогах пятого уровня на диске C.\r\n" +
+        "\r\n" +
+        "Версия 1.01 / 16.02.2017\r\n" +
+        "- добавлены иконки файлов (Word, Excel, pdf)\r\n" +
+        "- добавился поиск документов Microsoft Excel\r\n" +
+        "- редизайн «Типов файлов»\r\n" +
+        "- изменено окно «О программе»\r\n" +
+        "\r\n" +
+        "Версия 2.00 / 2026\r\n" +
+        "- Полная переработка приложения\r\n" +
+        "- Поддержка новых форматов: PDF, MP3, PowerPoint, изображения\r\n" +
+        "- Лицензионная система Pro\r\n" +
+        "- Добавлена справка\r\n" +
+        "- Английский язык",
+        "Version 1.00 / 15.02.2017\r\n" +
+        "File search across various formats (*.txt, *.doc, *.docx)\r\n" +
+        "in fifth-level directories on drive C.\r\n" +
+        "\r\n" +
+        "Version 1.01 / 16.02.2017\r\n" +
+        "- added file icons (Word, Excel, pdf)\r\n" +
+        "- added Microsoft Excel document search\r\n" +
+        "- redesigned File Types panel\r\n" +
+        "- updated About dialog\r\n" +
+        "\r\n" +
+        "Version 2.00 / 2026\r\n" +
+        "- Full application rewrite\r\n" +
+        "- Support for new formats: PDF, MP3, PowerPoint, images\r\n" +
+        "- Pro licensing system\r\n" +
+        "- Added help guide\r\n" +
+        "- English language");
+
     // ── ActivateLicenseDialog ─────────────────────────────────────────────────
     public static string ActTitle              => S("Активация лицензии", "License Activation");
     public static string ActEmailPlaceholder   => S("ваш e-mail для лицензии", "your email for the license");

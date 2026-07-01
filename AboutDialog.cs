@@ -13,9 +13,11 @@ public partial class AboutDialog : Form
 
     private void ApplyLanguage()
     {
-        tabAbout.Text  = Lang.TabAbout;
-        tabHelp.Text   = Lang.TabHelp;
-        lblAuthor.Text = Lang.AboutAuthor;
+        Text               = Lang.TabAbout;
+        tabAbout.Text      = Lang.TabAbout;
+        tabHelp.Text       = Lang.TabHelp;
+        lblAuthor.Text     = Lang.AboutAuthor;
+        txtHistory.Text    = Lang.HistoryText;
     }
 
     private void PopulateHelp()
